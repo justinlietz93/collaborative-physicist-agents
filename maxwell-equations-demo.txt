@@ -1,0 +1,75 @@
+Maxwell's Equations - Classical Electrodynamics
+
+Introduction
+Maxwell's equations are a set of coupled partial differential equations that, together with the Lorentz force law, form the foundation of classical electrodynamics, classical optics, and electric circuits.
+
+Gauss's Law
+The first Maxwell equation relates the electric flux through any closed surface to the charge enclosed by that surface:
+
+∮ E⃗ · dA⃗ = Q_enclosed / ε₀
+
+In differential form:
+∇ · E⃗ = ρ / ε₀
+
+This equation states that electric field lines originate from positive charges and terminate on negative charges.
+
+Gauss's Law for Magnetism
+The second Maxwell equation states that the magnetic flux through any closed surface is zero:
+
+∮ B⃗ · dA⃗ = 0
+
+In differential form:
+∇ · B⃗ = 0
+
+This equation reflects the fact that magnetic monopoles do not exist - magnetic field lines always form closed loops.
+
+Faraday's Law
+The third Maxwell equation describes electromagnetic induction:
+
+∮ E⃗ · dl⃗ = -dΦ_B/dt
+
+In differential form:
+∇ × E⃗ = -∂B⃗/∂t
+
+A changing magnetic field creates a circulating electric field.
+
+Ampère-Maxwell Law
+The fourth Maxwell equation relates the magnetic field to electric current and the changing electric field:
+
+∮ B⃗ · dl⃗ = μ₀I_enclosed + μ₀ε₀ ∂Φ_E/∂t
+
+In differential form:
+∇ × B⃗ = μ₀J⃗ + μ₀ε₀ ∂E⃗/∂t
+
+The displacement current term (μ₀ε₀ ∂E⃗/∂t) was Maxwell's key insight, enabling the prediction of electromagnetic waves.
+
+Wave Equation Derivation
+Taking the curl of Faraday's law:
+∇ × (∇ × E⃗) = ∇ × (-∂B⃗/∂t) = -∂/∂t(∇ × B⃗)
+
+Substituting Ampère-Maxwell law:
+∇ × (∇ × E⃗) = -∂/∂t(μ₀J⃗ + μ₀ε₀ ∂E⃗/∂t)
+
+In vacuum (J⃗ = 0):
+∇ × (∇ × E⃗) = -μ₀ε₀ ∂²E⃗/∂t²
+
+Using the vector identity ∇ × (∇ × E⃗) = ∇(∇ · E⃗) - ∇²E⃗ and Gauss's law (∇ · E⃗ = 0 in vacuum):
+
+∇²E⃗ = μ₀ε₀ ∂²E⃗/∂t²
+
+This is the wave equation with speed c = 1/√(μ₀ε₀) ≈ 3×10⁸ m/s.
+
+Electromagnetic Wave Properties
+- Transverse waves: E⃗ ⊥ B⃗ ⊥ direction of propagation
+- Energy density: u = ½(ε₀E² + B²/μ₀)
+- Poynting vector: S⃗ = (1/μ₀)(E⃗ × B⃗)
+- Momentum density: g⃗ = S⃗/c²
+
+Applications
+Maxwell's equations enable the understanding of:
+- Electromagnetic wave propagation
+- Antenna theory and design
+- Waveguides and transmission lines
+- Optical phenomena
+- Plasma physics
+- Relativistic electrodynamics
