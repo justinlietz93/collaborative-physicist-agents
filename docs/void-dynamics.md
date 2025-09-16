@@ -22,22 +22,23 @@ These layers communicate through JSON payloads so the React presentation tier ne
 
 ```mermaid
 flowchart LR
-    subgraph Presentation (React)
+    subgraph presentation["Presentation (React)"]
         UI[AgentCollaboration.tsx]
         Engine[AutonomousEngine.tsx]
     end
-    subgraph Application (TypeScript)
+    subgraph application["Application (TypeScript)"]
         Context[buildCollaborationContext]
         Formatter[formatAgentKnowledgeContext]
     end
-    subgraph Bridge (Node IPC)
+    subgraph bridge["Bridge (Node IPC)"]
         Payload[JSON payload]
         Runner[child_process.execFileSync]
     end
-    subgraph Domain/Business (Python)
+    subgraph domain["Domain / Business (Python)"]
         Manager[VoidMemoryManager]
         State[MemoryState]
     end
+
     UI --> Engine
     Engine --> Context
     Context --> Formatter
@@ -87,7 +88,7 @@ Document the captured metrics in your observability stack so drifts in reinforce
 Existing deployments should:
 
 1. Run `node scripts/migrate-autonomous-config.mjs <path/to/runtime.config.json>` to update autonomous defaults and align with
-   the persistence layout.
+the persistence layout.
 2. Export any legacy memory stores, then pipe them through `python -m src.void_dynamics.persistence --migrate <path>` once such
    tooling is provided. The current manager accepts persistence version `1` and will emit lifecycle events if a future upgrade is
    required.
