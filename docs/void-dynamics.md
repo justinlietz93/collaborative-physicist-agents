@@ -22,32 +22,33 @@ These layers communicate through JSON payloads so the React presentation tier ne
 
 ```mermaid
 flowchart LR
-    subgraph presentation["Presentation (React)"]
-        UI[AgentCollaboration.tsx]
-        Engine[AutonomousEngine.tsx]
-    end
-    subgraph application["Application (TypeScript)"]
-        Context[buildCollaborationContext]
-        Formatter[formatAgentKnowledgeContext]
-    end
-    subgraph bridge["Bridge (Node IPC)"]
-        Payload[JSON payload]
-        Runner[child_process.execFileSync]
-    end
-    subgraph domain["Domain / Business (Python)"]
-        Manager[VoidMemoryManager]
-        State[MemoryState]
-    end
+  %% Layers
+  subgraph Presentation
+    UI[AgentCollaboration.tsx]
+    Engine[AutonomousEngine.tsx]
+  end
 
-    UI --> Engine
-    Engine --> Context
-    Context --> Formatter
-    Formatter --> Payload
-    Payload --> Runner
-    Runner --> Manager
-    Manager --> State
-    Manager -->|events/stats| Runner
-    Runner -->|JSON response| Formatter
+  subgraph Application
+    Context[buildCollaborationContext]
+    Formatter[formatAgentKnowledgeContext]
+  end
+
+  subgraph Bridge
+    Payload[(JSON payload)]
+    Runner[child_process.execFileSync]
+  end
+
+  subgraph Domain
+    Manager[VoidMemoryManager]
+    State[(MemoryState)]
+  end
+
+  %% Primary flow
+  UI --> Engine --> Context --> Formatter --> Payload --> Runner --> Manager --> State
+
+  %% Feedback paths
+  Manager -->|events & stats| Runner
+  Runner -->|JSON response| Formatter
 ```
 
 The TypeScript application code serialises collaboration artefacts, ships them to a Python process, and consumes the resulting
