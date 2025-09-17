@@ -22,31 +22,33 @@ These layers communicate through JSON payloads so the React presentation tier ne
 
 ```mermaid
 flowchart LR
-    subgraph Presentation (React)
-        UI[AgentCollaboration.tsx]
-        Engine[AutonomousEngine.tsx]
-    end
-    subgraph Application (TypeScript)
-        Context[buildCollaborationContext]
-        Formatter[formatAgentKnowledgeContext]
-    end
-    subgraph Bridge (Node IPC)
-        Payload[JSON payload]
-        Runner[child_process.execFileSync]
-    end
-    subgraph Domain/Business (Python)
-        Manager[VoidMemoryManager]
-        State[MemoryState]
-    end
-    UI --> Engine
-    Engine --> Context
-    Context --> Formatter
-    Formatter --> Payload
-    Payload --> Runner
-    Runner --> Manager
-    Manager --> State
-    Manager -->|events/stats| Runner
-    Runner -->|JSON response| Formatter
+  %% Layers
+  subgraph Presentation
+    UI[AgentCollaboration.tsx]
+    Engine[AutonomousEngine.tsx]
+  end
+
+  subgraph Application
+    Context[buildCollaborationContext]
+    Formatter[formatAgentKnowledgeContext]
+  end
+
+  subgraph Bridge
+    Payload[(JSON payload)]
+    Runner[child_process.execFileSync]
+  end
+
+  subgraph Domain
+    Manager[VoidMemoryManager]
+    State[(MemoryState)]
+  end
+
+  %% Primary flow
+  UI --> Engine --> Context --> Formatter --> Payload --> Runner --> Manager --> State
+
+  %% Feedback paths
+  Manager -->|events & stats| Runner
+  Runner -->|JSON response| Formatter
 ```
 
 The TypeScript application code serialises collaboration artefacts, ships them to a Python process, and consumes the resulting
@@ -87,7 +89,7 @@ Document the captured metrics in your observability stack so drifts in reinforce
 Existing deployments should:
 
 1. Run `node scripts/migrate-autonomous-config.mjs <path/to/runtime.config.json>` to update autonomous defaults and align with
-   the persistence layout.
+the persistence layout.
 2. Export any legacy memory stores, then pipe them through `python -m src.void_dynamics.persistence --migrate <path>` once such
    tooling is provided. The current manager accepts persistence version `1` and will emit lifecycle events if a future upgrade is
    required.
