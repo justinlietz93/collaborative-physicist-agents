@@ -23,7 +23,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
+memory-bank/*
+.github/architect.chatmode.md
+.github/ask.chatmode.md
+.github/code.chatmode.md
+.github/debug.chatmode.md
+.github/instructions
+.github/chatmodes
+CHECKLIST.md
 .env
 **/agent-eval-report*
 pids
