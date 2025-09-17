@@ -4,6 +4,8 @@ Collaborative Physics Lab is a research sandbox for exploring multi-agent reason
 application pairs a React front end with the Void Dynamics learning graph so autonomous agents can exchange structured
 context, ground their deductions in shared memory, and persist the resulting breakthroughs.
 
+[![CI](https://github.com/justinlietz93/collaborative-physicist-agents/actions/workflows/ci.yml/badge.svg)](https://github.com/justinlietz93/collaborative-physicist-agents/actions/workflows/ci.yml)
+
 ## Feature Highlights
 
 - **Void Dynamics memory manager** – a Python learning graph that tracks reinforcement, novelty, inhibition, and territory
