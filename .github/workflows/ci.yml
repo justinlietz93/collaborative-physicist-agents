@@ -25,6 +25,12 @@ jobs:
         
       - name: Show package-lock.json contents
         run: cat package-lock.json
+      
+      - name: Clean npm cache
+        run: npm cache clean --force
+      
+      - name: Show npm version
+        run: npm -v
         
       - name: Install Node dependencies
         run: npm ci
